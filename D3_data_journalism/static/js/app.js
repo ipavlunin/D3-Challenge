@@ -1,7 +1,6 @@
 // Application to render data into interactive D3 plots.
 
 // Creating a pattern area to render future charts
-
 var svgWidth = 800;
 var svgHeight = 500;
 
@@ -16,7 +15,6 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 // SVG wrapper, append an SVG group that will hold our chart
-
 var svg = d3
     .select("#scatter")
     .append("svg")
@@ -69,4 +67,25 @@ function yScale(journalData, chosenYAxis) {
         ]).range([height, 0]);
 
     return yLinScale;
+}
+
+// Function to update circle groups with transition to a new circle
+function renderCircles(circleGroup, newXScale, newYScale, chosenXAxis, chosenYAxis) {
+
+    circleGroup.transition()
+        .duration(1500)
+        .attr("cx", d => newXScale(d[chosenXAxis]))
+        .attr("cy", d => newYScale(d[chosenYAxis]));
+
+    return circleGroup;
+}
+
+// Creating circle text labels
+function renderText(textLabel, newXScale, chosenXAxis, chosenYAxis) {
+    textLabel.transition()
+        .duration(1500)
+        .attr("x", d => newXScale(d[chosenXAxis]))
+        .attr("y", d => newYScale(d[chosenYAxis]) + 6);
+
+    return textLabel;
 }
