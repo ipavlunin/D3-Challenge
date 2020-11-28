@@ -301,7 +301,58 @@ d3.csv("static/data/data.csv").then(function (censusData) {
     });
 
     // Event listener for y-axis
+    ylabGroup.selectAll("text").on("click", function () {
 
+        var yvalue = d3.select(this).attr("value");
+        if (yvalue !== chosenYAxis) {
 
+            chosenYAxis = yvalue;
+            console.log(chosenYAxis);
 
-})
+            yLinScale = yScale(censusData, chosenYAxis);
+
+            yAxis = renderYAxes(yLinScale, yAxis);
+
+            circleGroup = renderCircles(circleGroup, xLinScale, yLinScale, chosenXAxis, chosenYAxis);
+            textLabel = renderText(textLabel, xLinScale, yLinScale, chosenXAxis, chosenYAxis);
+
+            textLabel = updateToolTip(chosenXAxis, chosenYAxis, textLabel);
+
+            if (chosenYAxis === "smokes") {
+                healthLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                obesLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                smokesLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+            }
+            else if (chosenYAxis === "obesity") {
+                healthLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                obesLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                smokesLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+            else {
+                healthLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                obesLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                smokesLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+        }
+    });
+}).catch(function (error) {
+    console.log(error);
+});
