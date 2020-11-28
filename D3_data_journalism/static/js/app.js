@@ -26,3 +26,28 @@ var svg = d3
 // Append an SVG group
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Parameters
+var chosenXAxis = "poverty";
+var chosenYAxis = "healthcare";
+
+// Function to update xAxis then clicked on axis label
+function renderXAxes(newXScale, xAxis) {
+    var bottomAxis = d3.axisBottom(newScale);
+
+    xAxis.transition()
+        .duration(1500)
+        .call(bottomAxis);
+
+    return xAxis;
+}
+
+function renderYAxis(newYScale, yAxis) {
+    var leftAxis = d3.axisLeft(newYScale);
+
+    yAxis.transition()
+        .duration(1500)
+        .call(leftAxis);
+
+    return yAxis;
+}
