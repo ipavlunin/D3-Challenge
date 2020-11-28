@@ -31,7 +31,7 @@ var chartGroup = svg.append("g")
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
-// Function to update xAxis then clicked on axis label
+// Function to update Axes then clicked on axis label
 function renderXAxes(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newScale);
 
@@ -50,4 +50,23 @@ function renderYAxis(newYScale, yAxis) {
         .call(leftAxis);
 
     return yAxis;
+}
+
+// Function to update Axes scales then clicked on axis label
+function xScale(journalData, chosenXAxis) {
+    var xLinScale = d3.scaleLinear()
+        .domain([d3.min(journalData, d => d[chosenXAxis]) * 0.9,
+        d3.max(journalData, d => d[chosenXAxis]) * 1.1
+        ]).range([0, width]);
+
+    return xLinScale;
+}
+
+function yScale(journalData, chosenYAxis) {
+    var yLinScale = d3.scaleLinear()
+        .domain([d3.min(journalData, d => d[chosenYAxis]) * 0.7,
+        d3.max(journalData, d => d[chosenYAxis]) * 1.1
+        ]).range([height, 0]);
+
+    return yLinScale;
 }
