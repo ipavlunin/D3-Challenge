@@ -1,4 +1,4 @@
-// Application to render data into interactive D3 plots.
+// Application to render data into interactive D3 plot.
 
 // Creating a pattern area to render future charts
 var svgWidth = 800;
@@ -86,6 +86,57 @@ function renderText(textLabel, newXScale, chosenXAxis, chosenYAxis) {
         .duration(1500)
         .attr("x", d => newXScale(d[chosenXAxis]))
         .attr("y", d => newYScale(d[chosenYAxis]) + 6);
+
+    return textLabel;
+}
+
+// Function to update circle groups with new tooltips
+function updateTooltip(chosenXAxis, chosenYAxis, textLabel) {
+
+    var xLabel;
+    var yLabel;
+
+    if (chosenXAxis === "poverty") {
+        xLabel = "Poverty(%):";
+    }
+    else if (chosenXAxis === "income") {
+        xLabel = "Income($$$):";
+    }
+    else {
+        xLabel = "Age:";
+    }
+
+    if (chosenYAxis === "healthcare") {
+        yLabel = "Healthcare(%):";
+    }
+    else if (chosenYAxis === "smokes") {
+        yLabel = "Smokes:";
+    }
+    else {
+        yLabel = "Obese:";
+    }
+
+
+    var toolTip = d3.tip()
+        .attr("class", "d3-tip")
+        .style("text-align", center)
+        .style("background-color", lightgrey)
+        .style("opacity", 0.5)
+        .style("color", black)
+        .offset([80, 40])
+        .html(function (d) {
+            return (`${d, state}<br>${yLabel} ${d[chosenYAxis]}<br>${xLabel} ${d[chosenXAxis]}`);
+        });
+
+    textLabel.call(toolTip);
+
+    textLabel.on("mouseover", function (data) {
+        toolTip.show(data);
+    })
+
+        .on("mouseout", function (data) {
+            toolTip.hide(data);
+        });
 
     return textLabel;
 }
