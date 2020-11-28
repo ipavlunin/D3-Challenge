@@ -246,5 +246,62 @@ d3.csv("static/data/data.csv").then(function (censusData) {
 
     var textLabel = updateToolTip(chosenXAxis, chosenYAxis, textGroup);
 
+    // Event listener for x-axis
+    xlabGroup.selectAll("text").on("click", function () {
+
+        var xvalue = d3.select(this).attr("value");
+        if (xvalue !== chosenXAxis) {
+
+            chosenXAxis = xvalue;
+            console.log(chosenXAxis);
+
+            xLinScale = xScale(censusData, chosenXAxis);
+
+            xAxis = renderAxes(xLinScale, xAxis);
+
+            circleGroup = renderCircles(circleGroup, xLinScale, yLinScale, chosenXAxis, chosenYAxis);
+            textLabel = renderText(textLabel, xLinScale, yLinScale, chosenXAxis, chosenYAxis);
+
+            textLabel = updateToolTip(chosenXAxis, chosenYAxis, textLabel);
+
+            if (chosenXAxis === "age") {
+                ageLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                povertyLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                incomeLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+            else if (chosenXAxis === "poverty") {
+                ageLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                povertyLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+                incomeLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+            }
+            else {
+                ageLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                povertyLabel
+                    .classed("active", false)
+                    .classed("inactive", true);
+                incomeLabel
+                    .classed("active", true)
+                    .classed("inactive", false);
+            }
+        }
+    });
+
+    // Event listener for y-axis
+
+
 
 })
