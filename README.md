@@ -1,6 +1,6 @@
 Data Journalism and D3
 
-![scatter_plot](D3_data_journalism/static/images/Scatter.jpeg)
+![scatter_plot](static/images/Scatter.jpeg)
 
 
 The data set in this project is based on 2014 ACS 1-year estimates from the [US Census Bureau](https://data.census.gov/cedsci/). The current data set includes data on rates of income, obesity, poverty, etc. by state.
@@ -14,7 +14,7 @@ In order to preview dashboard scatter plot visualization locally navigate tp the
 
 Visualization is interactive by clicking on desired X or Y data labels, navigating mouse over a circles will popup with selected data points.
 
-Published GitHub version is accessible via following link 
+Published GitHub version is accessible via following link [GitHub Link](https://ipavlunin.github.io/D3-Challenge/)
 
 - - -
 
