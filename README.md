@@ -1,6 +1,6 @@
 Data Journalism and D3
 
-![Scatter_plot]("static/images/Scatter.jpeg")
+![scatter_plot](D3_data_journalism/static/images/Scatter.jpeg)
 
 
 The data set in this project is based on 2014 ACS 1-year estimates from the [US Census Bureau](https://data.census.gov/cedsci/). The current data set includes data on rates of income, obesity, poverty, etc. by state.
