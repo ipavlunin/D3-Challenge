@@ -1,4 +1,4 @@
-Data Journalism and D3
+# Data Journalism and D3
 
 ![scatter_plot](static/images/Scatter.jpeg)
 
